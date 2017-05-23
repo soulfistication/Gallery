@@ -68,9 +68,8 @@ public class Cart {
 
   // MARK: - UIImages
 
-  func UIImages() -> [UIImage] {
-    lightBoxUIImages = Fetcher.fetchImages(images.map({ $0.asset }))
-    return lightBoxUIImages
+  func PHAssets() -> [PHAsset] {
+    return images.map { $0.asset }
   }
 
   func reload(_ UIImages: [UIImage]) {

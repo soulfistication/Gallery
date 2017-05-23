@@ -1,11 +1,12 @@
 import UIKit
 import AVFoundation
+import Photos
 
 public protocol GalleryControllerDelegate: class {
 
-  func galleryController(_ controller: GalleryController, didSelectImages images: [UIImage])
+  func galleryController(_ controller: GalleryController, didSelectImages images: [PHAsset])
   func galleryController(_ controller: GalleryController, didSelectVideo video: Video)
-  func galleryController(_ controller: GalleryController, requestLightbox images: [UIImage])
+  func galleryController(_ controller: GalleryController, requestLightbox images: [PHAsset])
   func galleryControllerDidCancel(_ controller: GalleryController)
 }
 
@@ -109,7 +110,7 @@ public class GalleryController: UIViewController, PermissionControllerDelegate {
 
     EventHub.shared.doneWithImages = { [weak self] in
       if let strongSelf = self {
-        strongSelf.delegate?.galleryController(strongSelf, didSelectImages: Cart.shared.UIImages())
+        strongSelf.delegate?.galleryController(strongSelf, didSelectImages: Cart.shared.PHAssets())
       }
     }
 
@@ -121,7 +122,7 @@ public class GalleryController: UIViewController, PermissionControllerDelegate {
 
     EventHub.shared.stackViewTouched = { [weak self] in
       if let strongSelf = self {
-        strongSelf.delegate?.galleryController(strongSelf, requestLightbox: Cart.shared.UIImages())
+        strongSelf.delegate?.galleryController(strongSelf, requestLightbox: Cart.shared.PHAssets())
       }
     }
   }
